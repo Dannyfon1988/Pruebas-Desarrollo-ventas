@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Gestión de Vendedores</h2>
+
+  <form (ngSubmit)="guardarVendedor()" #formulario="ngForm" class="row g-3">
+    <input type="hidden" [(ngModel)]="vendedor.id" name="id" />
+
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" [(ngModel)]="vendedor.nombre" name="nombre" required />
+    </div>
+
+    <div class="col-md-6">
+      <label for="correo" class="form-label">Correo:</label>
+      <input type="email" class="form-control" id="correo" [(ngModel)]="vendedor.correo" name="correo" required />
+    </div>
+
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+
+  <hr class="my-4" />
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of vendedores">
+          <td>{{ v.id }}</td>
+          <td>{{ v.nombre }}</td>
+          <td>{{ v.correo }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="editarVendedor(v)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="eliminarVendedor(v.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

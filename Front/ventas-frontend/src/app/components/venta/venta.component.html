@@ -1,0 +1,70 @@
+<h2 class="mt-4 mb-4">Gestión de Ventas</h2>
+
+<form class="mb-4" (ngSubmit)="guardarVenta()" #ventaForm="ngForm">
+  <input type="hidden" [(ngModel)]="venta.id" name="id" />
+
+  <div class="row mb-3">
+    <!-- Producto -->
+    <div class="col-md-6">
+      <label class="form-label">Producto:</label>
+      <select class="form-select" [(ngModel)]="venta.producto" name="producto" required>
+        <option *ngFor="let p of productos" [ngValue]="p">{{ p.nombre }}</option>
+      </select>
+    </div>
+
+    <!-- Vendedor -->
+    <div class="col-md-6">
+      <label class="form-label">Vendedor:</label>
+      <select class="form-select" [(ngModel)]="venta.vendedor" name="vendedor" required>
+        <option *ngFor="let v of vendedores" [ngValue]="v">{{ v.nombre }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <!-- Cantidad -->
+    <div class="col-md-4">
+      <label class="form-label">Cantidad:</label>
+      <input type="number" class="form-control" [(ngModel)]="venta.cantidad" name="cantidad" required />
+    </div>
+
+    <!-- Fecha -->
+    <div class="col-md-4">
+      <label class="form-label">Fecha:</label>
+      <input type="date" class="form-control" [(ngModel)]="venta.fecha" name="fecha" required />
+    </div>
+
+    <!-- Botón -->
+    <div class="col-md-4 d-flex align-items-end">
+      <button type="submit" class="btn btn-success w-100">Guardar</button>
+    </div>
+  </div>
+</form>
+
+<hr />
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Producto</th>
+      <th>Vendedor</th>
+      <th>Cantidad</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let v of ventas">
+      <td>{{ v.id }}</td>
+      <td>{{ v.producto.nombre }}</td>
+      <td>{{ v.vendedor.nombre }}</td>
+      <td>{{ v.cantidad }}</td>
+      <td>{{ v.fecha }}</td>
+      <td>
+        <button class="btn btn-warning btn-sm me-2" (click)="editarVenta(v)">Editar</button>
+        <button class="btn btn-danger btn-sm" (click)="eliminarVenta(v.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

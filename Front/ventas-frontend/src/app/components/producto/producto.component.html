@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Gestión de Productos</h2>
+
+  <form (ngSubmit)="guardarProducto()" #formulario="ngForm" class="row g-3">
+    <input type="hidden" [(ngModel)]="producto.id" name="id" />
+
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" [(ngModel)]="producto.nombre" name="nombre" required />
+    </div>
+
+    <div class="col-md-6">
+      <label for="precio" class="form-label">Precio:</label>
+      <input type="number" class="form-control" id="precio" [(ngModel)]="producto.precio" name="precio" required min="0" step="0.01" />
+    </div>
+
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+
+  <hr class="my-4" />
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of productos">
+          <td>{{ p.id }}</td>
+          <td>{{ p.nombre }}</td>
+          <td>{{ p.precio | currency:'COP':'symbol':'1.2-2' }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="editarProducto(p)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="eliminarProducto(p.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
